@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Book Store</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://kit.fontawesome.com/0faddc1af8.js" rel="stylesheet" crossorigin="anonymous">
+    <style>
+        body {
+            color: #333; /* Couleur du texte principale */
+        }
+        .navbar {
+            background-color: #343a40; /* Couleur de fond de la barre de navigation */
+            border-bottom: 2px solid #1d2124; /* Bordure inférieure */
+        }
+        .navbar-brand, .nav-link {
+            color: #fff; /* Couleur du texte de la barre de navigation */
+        }
+        .navbar-brand:hover, .nav-link:hover {
+            color: #ffc107; /* Couleur du texte au survol */
+        }
+        .container {
+            margin-top: 50px; /* Espacement en haut de la page */
+        }
+        .card {
+            background-color: #fff; /* Couleur de fond des cartes */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .btn-primary {
+            background-color: #007bff; /* Couleur de fond du bouton primaire */
+            border-color: #007bff; /* Couleur de la bordure */
+        }
+        .btn-primary:hover {
+            background-color: #0056b3; /* Couleur au survol */
+            border-color: #0056b3;
+        }
+        .btn-danger {
+            background-color: #dc3545; /* Couleur de fond du bouton danger */
+            border-color: #dc3545;
+        }
+        .btn-danger:hover {
+            background-color: #c82333; /* Couleur au survol */
+            border-color: #bd2130;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Barre de navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+<!--        <a class="navbar-brand" href="#">Book Store</a>-->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/adminScreen">Home</a>
+                </li>
+            </ul>
+<!--            <form class="d-flex">-->
+<!--                <button class="btn btn-primary me-2" type="submit">Ajouter un rôle à l'utilisateur</button>-->
+<!--                <button class="btn btn-primary" type="submit">Supprimer un rôle à l'utilisateur</button>-->
+<!--            </form>-->
+            <form th:action="@{/adminScreen/addRoleToUser}" method="get">
+                <button type="submit" class="btn btn-primary">Add Role to User</button>
+            </form>
+            <form th:action="@{/adminScreen/removeRoleToUser}" method="get">
+                <button type="submit" class="btn btn-primary">Remove Role to User</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<!-- Contenu de la page -->
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Liste des utilisateurs</h5>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Mot de passe</th>
+                                <th scope="col">Rôle</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="user : ${users}">
+                                <td th:text="${user.name}"></td>
+                                <td th:text="${user.email}"></td>
+                                <td th:text="${user.password}"></td>
+                                <td>
+                                    <ul>
+                                        <li th:each="role : ${user.role}">
+                                            <span th:text="${role.role}"></span>
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <div class="btn-group" role="group" aria-label="Actions">
+
+
+                                        <a style="color:blue" th:href="@{/adminScreen/edit/{id}(id=${user.id})}">
+                                            <i class="fa-solid fa-pen-to-square ms-4"></i>
+                                        </a>
+                                        <a style="color:red" th:href="@{/adminScreen/deleteUser/{id}(id=${user.id})}" onclick="return confirm('Are you sure you want to delete this user?');">
+                                            <i class="fa-solid fa-trash-alt"></i>
+                                        </a>
+
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://kit.fontawesome.com/0faddc1af8.js" crossorigin="anonymous"></script>
+</body>
+</html>

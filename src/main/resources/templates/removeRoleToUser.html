@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remove Role from User</title>
+    <!-- Ajoutez les liens vers les fichiers CSS Bootstrap et vos propres styles -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Couleur de fond */
+            padding-top: 70px; /* Pour tenir compte de la hauteur de la barre de navigation */
+        }
+        .container {
+            max-width: 800px; /* Largeur maximale du contenu */
+            margin: 0 auto; /* Centrer le contenu */
+            padding: 20px; /* Espacement intérieur */
+        }
+        h2 {
+            color: #007bff; /* Couleur du titre */
+            text-align: center; /* Centrer le texte */
+            margin-bottom: 30px; /* Espacement en bas */
+        }
+        label {
+            font-weight: bold; /* Texte en gras */
+        }
+        select {
+            width: 100%; /* Largeur maximale */
+            padding: 10px; /* Espacement intérieur */
+            margin-bottom: 20px; /* Espacement en bas */
+            border: 1px solid #ced4da; /* Bordure */
+            border-radius: 5px; /* Coins arrondis */
+        }
+        button[type="submit"] {
+            width: 100%; /* Largeur maximale */
+            padding: 10px; /* Espacement intérieur */
+            background-color: #dc3545; /* Couleur de fond du bouton */
+            border: none; /* Pas de bordure */
+            border-radius: 5px; /* Coins arrondis */
+            color: #fff; /* Couleur du texte */
+            cursor: pointer; /* Curseur pointeur */
+            transition: background-color 0.3s ease; /* Transition en douceur */
+        }
+        button[type="submit"]:hover {
+            background-color: #c82333; /* Couleur de fond du bouton au survol */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Barre de navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <!-- Contenu de la barre de navigation -->
+</nav>
+
+<!-- Contenu de la page -->
+<div class="container my-5">
+    <!-- Formulaire pour supprimer un rôle d'un utilisateur -->
+    <h2>Veuillez selectionner un utilisateur avec le rôle a supprimer ?</h2>
+    <form th:action="@{/adminScreen/removeRoleToUser}" method="post" th:object="${userWithRole}">
+        <div class="mb-3">
+            <label for="userId" class="form-label">User:</label>
+            <select class="form-select" id="userId" th:field="*{userId}" required>
+                <option value="">Select User</option>
+                <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.name}"></option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="roleId" class="form-label">Role:</label>
+            <select class="form-select" id="roleId" th:field="*{roleId}" required>
+                <option value="">Select Role</option>
+                <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.role}"></option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-danger">Remove Role</button>
+    </form>
+</div>
+
+<!-- Scripts JavaScript et autres balises de fermeture... -->
+
+</body>
+</html>

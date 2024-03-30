@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Role Based Auth</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+</head>
+<style>
+    .navbar {
+        background-color: #61df88;
+    }
+</style>
+
+<body>
+
+<!-- create navigation bar ( header) -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <h2>Role Based Authentication</h2>
+        </div>
+    </div>
+</nav>
+
+<br><br><br><br><br><br><br>
+<!-- Create HTML registration form -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+
+            <!-- success message -->
+
+            <h1>Modification d'un profil</h1>
+
+            <form th:object="${user}" th:action="@{/adminScreen/updateUser/{id}(id=${user.id})}" method="post">
+                <div class="form-group">
+                    <label class="control-label" for="firstName">
+                        First Name </label>
+                    <input id="firstName" class="form-control" th:field="*{name}" required autofocus="autofocus" />
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="email"> Email
+                    </label>
+                    <input id="email" class="form-control" th:field="*{email}" required autofocus="autofocus" />
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="password">
+                        Password </label>
+                    <input id="password" class="form-control" type="password" th:field="*{password}" required autofocus="autofocus" />
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="role">
+                        Role </label>
+                    <select id="role" th:field="*{role.role}" class="form-control form-control-lg">
+                        <option value="USER">USER</option>
+                        <option value="ADMIN">ADMIN</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">
+                        Update</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

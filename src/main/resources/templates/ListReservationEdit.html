@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Emprunteur Update</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Reservation Management System</h1>
+    <hr>
+    <h2>Update Reservation</h2>
+
+
+    <div class="container my-5 col-md-6">
+        <form id="myForm" th:action="@{/updateEmprunteurReservation/{id}(id=${reservation.id})}" method="post">
+            <th:block th:each="b :${reservation}">
+                <div class="row mb-3 book-details">
+<!--                    <div class="col">-->
+<!--                        <p><strong>Id:</strong> <span th:text="${b.customId}"></span></p>-->
+<!--                        <p><strong>Name:</strong> <span th:text="${b.name}"></span></p>-->
+<!--                        <p><strong>Author:</strong> <span th:text="${b.author}"></span></p>-->
+<!--                        <p><strong>Utilisateur:</strong> <span th:text="${b.nom_emprunteur}"></span></p>-->
+<!--                    </div>-->
+                    <div class="col">
+                        <label for="${b.emprunteurId}"><strong>Emprunteur:</strong></label>
+                        <select id="${b.emprunteurId}" name="emprunteurId" class="form-select">
+                            <option value="">Sélectionner un emprunteur</option>
+                            <th:block th:each="emprunteur : ${emprunteurs}">
+                                <option th:value="${emprunteur.id}" th:text="${emprunteur.name}"></option>
+                            </th:block>
+                        </select>
+                        <input type="hidden" name="customId" th:value="${b.customId}">
+                    </div>
+                </div>
+            </th:block>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+        </form>
+    </div>
+
+<!--    <form class="col-md-4 offset-md-4" th:action="@{'/' + ${reservation.id} + '/updatedReservation'}" method="post" th:object="${reservation}">-->
+
+<!--        &lt;!&ndash; Add hidden form field to handle update &ndash;&gt;-->
+<!--        <input type="hidden" th:field="*{id}" />-->
+
+<!--        <input type="text" th:field="*{customId}" placeholder="Name" class="form-control mb-4 col-4">-->
+<!--        <input type="text" th:field="*{author}" placeholder = "Email" class="form-control mb-4 col-4">-->
+<!--        <input type="text" th:field="*{name}" placeholder="Age" class="form-control mb-4 col-4">-->
+<!--        <input type="text" th:field="*{nom_emprunteur}" placeholder="Adresse" class="form-control mb-4 col-4">-->
+<!--        <div class="col">-->
+<!--            <label for="${b.emprunteurId}">Emprunteur:</label>-->
+<!--            <select id="${b.emprunteurId}" name="emprunteurId">-->
+<!--                <option value="">Sélectionner un emprunteur</option>-->
+<!--                &lt;!&ndash; Itérer sur la liste des emprunteurs &ndash;&gt;-->
+<!--                <th:block th:each="emprunteur : ${emprunteurs}">-->
+<!--                    <option th:value="${emprunteur.id}" th:text="${emprunteur.name}"></option>-->
+<!--                </th:block>-->
+<!--            </select>-->
+<!--            &lt;!&ndash; Champ caché pour l'ID du livre &ndash;&gt;-->
+<!--            <input type="hidden" name="customId" th:value="${b.customId}">-->
+<!--        </div>-->
+<!--        <button type="submit" class="btn btn-info col-2"> Update Reservation</button>-->
+<!--    </form>-->
+
+    <hr>
+
+    <a th:href = "@{/dashboard/myReservations}"> Back to Emprunteur List</a>
+</div>
+</body>
+</html>

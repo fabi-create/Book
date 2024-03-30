@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create User</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Create User</h2>
+
+    <form th:action="@{/adminScreen/saveUser}" method="post" th:object="${user}" th:object="${roles}">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" class="form-control" th:field="*{name}" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" class="form-control" th:field="*{email_id}" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" class="form-control" th:field="*{password}" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="roles">Roles:</label>
+            <select id="roles" class="form-control" th:field="*{roles}" multiple>
+                <option th:each="role : ${allRoles}" th:value="${role.role}" th:text="${role.role}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Create User</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            padding-top: 70px; /* Pour tenir compte de la hauteur de la barre de navigation fixe */
+            background-image: url('/images/paper-sheet-table.jpg'); /* Ajout de l'image de fond */
+            background-size: cover; /* Ajustement de la taille de l'image de fond */
+            background-position: center; /* Positionnement de l'image de fond */
+        }
+        .navbar {
+            background-color: #0c0c0c;
+        }
+        .navbar-brand {
+            color: #fff; /* Couleur du texte du nom de la marque */
+        }
+        .navbar-brand h4 {
+            margin: 0; /* Supprimer les marges autour du titre */
+        }
+        .navbar-nav>li>a {
+            color: #fff; /* Couleur du texte des liens de la barre de navigation */
+        }
+        .content {
+            padding: 50px; /* Espacement intérieur du contenu */
+        }
+        .card {
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Barre de navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <h4>Hi, Welcome <span th:text="*{userDetails}"> !!</span></h4>
+            </a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/logout"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Contenu de la page -->
+<div class="container content">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <h3>Liste des utilisateurs</h3>
+                <p>Gérez les utilisateurs de votre application.</p>
+                <a href="/adminScreen/users" class="btn btn-primary">Voir les utilisateurs</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

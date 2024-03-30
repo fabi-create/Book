@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        table {
+            width: 100%;
+        }
+        th, td {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h3 class="text-center mb-4">Liste de tous les emprunts</h3>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th>Id Livre</th>
+                <th>Author</th>
+                <th>Name</th>
+                <th>Utilisateur</th>
+                <th>Emprunteur</th>
+                <th>Date Emprunt</th>
+                <th>Date Retour Prevue</th>
+                <th>Date Retour</th>
+                <th>Pénalité</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="myBooks : ${allmyBooklist}">
+                <td th:text="${myBooks.customId}"></td>
+                <td th:text="${myBooks.author}"></td>
+                <td th:text="${myBooks.name}"></td>
+                <td th:text="${myBooks.nom_emprunteur}"></td>
+                <td th:text="${myBooks.emprunteur != null ? myBooks.emprunteur.getName() : 'N/A'}"></td>
+                <td th:text="${myBooks.date_emprunt}"></td>
+                <td th:text="${myBooks.date_retour_prevue}"></td>
+                <td th:text="${myBooks.date_retour}"></td>
+                <td th:text="${myBooks.penalite}"></td>
+                <td>
+                    <a th:href="@{/editMyList/{id}(id=${myBooks.id})}" class="btn btn-primary btn-sm">Update</a>
+                </td>
+                <td>
+                    <a th:href="@{/deleteMyList/{id}(id=${myBooks.id})}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

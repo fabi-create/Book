@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Rservation</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container my-2" align="center">
+    <h3>Liste de toutes les reservations</h3>
+    <table style="width:80%" border="1" class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>Id Livre</th>
+            <th>Author</th>
+            <th>Name</th>
+            <th>Utilisateur</th>
+            <th>Emprunteur</th>
+<!--            <th>Update</th>-->
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="myReservations : ${allmyReservationlist}">
+            <td th:text="${myReservations.customId}"></td>
+            <td th:text="${myReservations.author}"></td>
+            <td th:text="${myReservations.name}"></td>
+            <td th:text="${myReservations.emprunteur != null ? myReservations.emprunteur.getName() : 'N/A'}"></td>
+            <td th:text="${myReservations.nom_emprunteur}"></td>
+
+<!--            <td>-->
+
+<!--                <a th:href="@{/editMyReservationList/{id}(id=${myReservations.id})}" class="btn btn-primary">Update</a>-->
+<!--            </td>-->
+            <td>
+                <a th:href="@{/deleteMyReservationList/{id}(id=${myReservations.id})}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

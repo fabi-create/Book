@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>  /* style.css */
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: sans-serif;
+        line-height: 1.5;
+        min-height: 100vh;
+        background: #f3f3f3;
+        flex-direction: column;
+        margin: 0;
+    }
+
+    .main {
+        background-color: #fff;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        padding: 10px 20px;
+        transition: transform 0.2s;
+        width: 500px;
+        text-align: center;
+    }
+
+    h1 {
+        color: #4CAF50;
+    }
+
+    label {
+        display: block;
+        width: 100%;
+        margin-top: 10px;
+        margin-bottom: 5px;
+        text-align: left;
+        color: #555;
+        font-weight: bold;
+    }
+
+    #pass {
+        color: red;
+        font-size: 12px;
+    }
+
+    input {
+        display: block;
+        width: 100%;
+        margin-bottom: 15px;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    select {
+        display: block;
+        width: 100%;
+        margin-bottom: 15px;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    button {
+        padding: 15px;
+        border-radius: 10px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        border: none;
+        color: white;
+        cursor: pointer;
+        background-color: #4CAF50;
+        width: 100%;
+        font-size: 16px;
+    }
+
+    .wrap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }</style>
+    <title>Registration Form</title>
+
+
+
+
+</head>
+
+<body>
+<div class="main">
+    <h3>Please register</h3>
+    <div th:if="${param.success}">
+        <div class="alert alert-info">You've successfully registered
+            to our awesome app!</div>
+    </div>
+    <form th:action="@{/registration}" method="post"
+          th:object="${user}">
+        <label for="name">First Name:</label>
+        <input id="firstName" class="form-control"
+               th:field="*{name}" required
+               autofocus="autofocus" >
+
+        <label for="email">E_mail:</label>
+        <input id="email" class="form-control"
+               th:field="*{email_id}" required autofocus="autofocus">
+
+        <label for="password">Password:</label>
+        <input id="password"
+               class="form-control" type="password"
+               th:field="*{password}" required
+               autofocus="autofocus">
+
+<!--        <label  for="role">-->
+<!--            Role </label> <select id="role" th:field="*{role}" class="form-control form-control-lg">-->
+<!--        <option value="USER">MANAGER</option>-->
+<!--        <option value="ADMIN">ADMIN</option>-->
+
+<!--    </select>-->
+
+        <label for="role">Role</label>
+        <select id="role" name="role" class="form-control form-control-lg" disabled>
+            <option value="USER">USER</option>
+            <option value="ADMIN">ADMIN</option>
+        </select>
+        <input type="hidden" name="role" value="USER">
+
+
+        <div class="wrap">
+            <button type="submit" class="btn btn-primary">
+                Register</button>
+            <span>Already registered? <a href="/"
+                                         th:href="@{/login}">Login
+                                here</a></span>
+        </div>
+    </form>
+</div>
+<script src="script.js"></script>
+</body>
+
+</html>
