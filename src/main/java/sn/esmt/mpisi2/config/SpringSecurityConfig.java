@@ -44,62 +44,44 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
         auth.authenticationProvider(authenticationProvider());
     }
 
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests().antMatchers("/registration").permitAll().anyRequest()
-//                .authenticated().and().formLogin().loginPage("/login").successHandler(successHandler).
-//                permitAll().and().logout()
-//                .invalidateHttpSession(true).clearAuthentication(true)
-//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).
-//                logoutSuccessUrl("/login?logout")
-//                .permitAll();
-//
-//    }
-
-
     @Override
-protected void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests()
-            .antMatchers("/registration").permitAll()
-            .antMatchers("/api/dashboard/**").permitAll()
-            .antMatchers("/api/registration/**").permitAll()
-            .antMatchers("/api/login/**").permitAll()
-            .antMatchers("/api/adminScreen/**").permitAll()
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests().antMatchers("/registration").permitAll().anyRequest()
+                .authenticated().and().formLogin().loginPage("/login").successHandler(successHandler).
+                permitAll().and().logout()
+                .invalidateHttpSession(true).clearAuthentication(true)
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).
+                logoutSuccessUrl("/login?logout")
+                .permitAll();
 
-            .anyRequest().authenticated()
-            .and()
-           // .csrf().disable() // Désactiver CSRF
-            .formLogin()
-            .loginPage("/login").successHandler(successHandler)
-            .permitAll()
-            .and()
-            .logout()
-            .invalidateHttpSession(true)
-            .clearAuthentication(true)
-            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-            .logoutSuccessUrl("/login?logout")
-            .permitAll();
-}
+    }
 
 
 //    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests()
-//                .antMatchers("/**").permitAll() // Autoriser l'accès à toutes les URL sans authentification
-//                .anyRequest().authenticated()
-//                .and()
-//                // .csrf().disable() // Désactiver CSRF
-//                .formLogin()
-//                .loginPage("/login").successHandler(successHandler)
-//                .permitAll()
-//                .and()
-//                .logout()
-//                .invalidateHttpSession(true)
-//                .clearAuthentication(true)
-//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//                .logoutSuccessUrl("/login?logout")
-//                .permitAll();
-//    }
+//protected void configure(HttpSecurity http) throws Exception {
+//    http.authorizeRequests()
+//            .antMatchers("/registration").permitAll()
+//            .antMatchers("/api/dashboard/**").permitAll()
+//            .antMatchers("/api/registration/**").permitAll()
+//            .antMatchers("/api/login/**").permitAll()
+//            .antMatchers("/api/adminScreen/**").permitAll()
+//
+//            .anyRequest().authenticated()
+//            .and()
+//           // .csrf().disable() // Désactiver CSRF
+//            .formLogin()
+//            .loginPage("/login").successHandler(successHandler)
+//            .permitAll()
+//            .and()
+//            .logout()
+//            .invalidateHttpSession(true)
+//            .clearAuthentication(true)
+//            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//            .logoutSuccessUrl("/login?logout")
+//            .permitAll();
+//}
+
+
 
 
 }
